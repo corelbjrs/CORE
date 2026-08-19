@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('expertise_id')->constrained('expertises')->onDelete('cascade');
             $table->string('display_name')->unique(); // e.g., "Bachelor of Science in Information Technology"
+            $table->string('educ_level'); // e.g., "BSIT"
             $table->timestamps();
         });
     }
