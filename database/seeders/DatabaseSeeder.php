@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             ExpertiseSeeder::class,
+            CourseExpertiseSeeder::class,
+            MissOccSeeder::class,
         ]);
     }
 }
