@@ -143,11 +143,12 @@ Route::middleware('auth')->group(function () {
     // Dynamic Helper APIs
     Route::get('/get-skills/{expertiseId}', [JobPostingController::class, 'getSkillsByExpertise']);
     Route::get('/get-courses/{expertiseId}', [EmployerController::class, 'getCourses']);
-    /* --- Public APIs / Location Helpers --- */
+    /* --- Public APIs / Location Helpers ---d */
     Route::get('/api/provinces', [LocationController::class, 'getProvinces']);
     Route::get('/api/towns', [LocationController::class, 'getTowns']);
     Route::get('/api/barangays', [LocationController::class, 'getBarangays']);
 
+    
     /* --- Admin & PESO Management --- */
     Route::get('/adtv', [AdminAccountController::class, 'index'])->name('adtv.index');
     Route::get('/adtv/lu', [AdminAccountController::class, 'adtv_listUsers'])->name('adtv_listUsers');
