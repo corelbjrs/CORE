@@ -39,7 +39,7 @@ class AdminAccountController extends Controller
         return view('adtv.emp', compact('user'));
     }
 
-    public function adtv_listUsers(): View
+    public function adtvListUsers(): View
     {
         // Fetch and separate users by their account usertype
         $admins = UserDetails::whereHas('account', function ($query) {

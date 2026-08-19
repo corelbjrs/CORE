@@ -153,7 +153,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/adtv/lu', [AdminAccountController::class, 'adtv_listUsers'])->name('adtv_listUsers');
     Route::get('/adtv/nu', [AdminAccountController::class, 'adtv_addUser'])->name('adtv_addUser');
     Route::post('/adtv/nu', [AdminAccountController::class, 'adtv_storeUser'])->name('adtv_storeUser');
-    Route::get('/admin/users', [AdminAccountController::class, 'adtv_listUsers'])->name('adtv_listUsers');
+    Route::get('/admin/users', [AdminAccountController::class, 'adtvListUsers'])->name('adtvListUsers');
     Route::get('/admin/admins', [AdminAccountController::class, 'adtv_listAdmins'])->name('adtv_listAdmins');
     Route::get('/adtv/emp', [AdminAccountController::class, 'adtv_createEmployer'])->name('adtv_createEmployer');
     Route::post('/adtv/emp', [AdminAccountController::class, 'adtv_storeEmployer'])->name('adtv_storeEmployer');
