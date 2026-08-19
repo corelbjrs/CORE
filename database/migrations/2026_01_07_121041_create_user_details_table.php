@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('civil_status',15)->nullable();
             $table->string('educational_level',60)->nullable();
             //$table->bigInteger('course_id',20)->nullable();
-            $table->foreignId('course_id')->nullable()->constrained('courses');
+            $table->string('course_id', 20)->nullable();
             $table->text('about_me')->nullable();
 
             $table->timestamps();
