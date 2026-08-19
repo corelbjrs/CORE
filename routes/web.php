@@ -33,9 +33,10 @@ use Illuminate\Support\Facades\Route;
 
 // Landing Page
 // Route::redirect('/', '/public');
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::view('/', 'welcome');
 
 // Public job views for guest users
 Route::get('/public', [PublicJobController::class, 'index'])->name('public.jobs');
