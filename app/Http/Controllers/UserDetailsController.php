@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\EducationalDetail;
 use App\Http\Requests\StoreUserDetailsRequest;
 use App\Http\Requests\UpdateUserDetailsRequest;
+use App\Http\Requests\UpdateUserContactDetailsRequest;
 use App\Http\Requests\UpdateUserSexRequest;
 use App\Http\Requests\UpdateUserGenderRequest;
 use App\Http\Requests\UpdateUserAboutRequest;
@@ -21,13 +22,19 @@ use App\Http\Requests\UpdateUserCivilRequest;
 
 class UserDetailsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function contact()
     {
-        $user = User::where('email', auth()->user()->email)->first();
-        return view('app.details', compact('user'));
+        // return view('user.sex');
+        $user = User::where('idno', auth()->user()->idno)->first();
+        return view('app.contact', compact('user'));
+    }
+    public function updateContact(UpdateUserContactDetailsRequest $request, $idno)
+    {
+        $validatedData = $request->validated();
+        $userContact = UserDetails::where('idno', $idno)->firstOrFail();
+        $userContact->update($validatedData);
+        return redirect()->route('civil.index')->with('success', 'User contact information saved successfully.');
+
     }
     public function profile()
     {
@@ -68,6 +75,24 @@ class UserDetailsController extends Controller
         ]));
 
         return redirect()->route('address.index')->with('success', 'User details saved successfully.');
+    }
+    public function contact_details(UpdateUserContactDetailsRequest $request, $idno)
+    {
+        $validatedData = $request->validated();
+
+        $contactDetails = UserDetails::where('idno', $idno)->firstOrFail();
+
+        $contactDetails->update($validatedData);
+        
+        $jobId = $request->input('job_id');
+
+        // If job_id exists, redirect to profile_review with the parameter
+        if ($jobId) {
+            return redirect()->route('profile_review', ['job_id' => $jobId])
+                            ->with('success', 'User details updated.');
+        }
+
+        return back()->with('success', 'User details updated.');
     }
 
     /**
@@ -135,7 +160,7 @@ class UserDetailsController extends Controller
         $userAddress->update($validatedData);
 
         // 6. Redirect to the index page with a success message
-        return redirect()->route('sex.index')->with('success', 'User address and matching coordinates updated.');
+        return redirect()->route('contact.index')->with('success', 'User address and matching coordinates updated.');
     }
 
 
@@ -297,15 +322,11 @@ class UserDetailsController extends Controller
     }
     public function updateAbout(UpdateUserAboutRequest $request, $idno)
     {
-        // $validatedData = $request->validate([
-        //     'about_me' => 'required|string|max:255',
-        // ]);
-
         $validatedData = $request->validated();
         $userAddress = UserDetails::where('idno', $idno)->firstOrFail();
         $userAddress->update($validatedData);
-        return redirect()->route('background.index')->with('success', 'User details saved successfully.');
-
+        
+        return back()->with('success', 'User details updated.');
     }
     /**
      * Remove the specified resource from storage.

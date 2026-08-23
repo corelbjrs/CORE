@@ -108,7 +108,7 @@
             </div>
 
         @else
-            <form action="{{ route('profile_review', $job->job_id) }}" method="POST" class="w-full sm:w-auto">
+            <form action="{{ route('profile_review', $job->job_id) }}" class="w-full sm:w-auto">
                 @csrf
                 <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium text-center rounded-lg shadow transition duration-150 ease-in-out">
                     Apply Now

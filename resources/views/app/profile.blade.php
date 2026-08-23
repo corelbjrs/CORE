@@ -308,9 +308,9 @@
     <!-- Personal Summary Section Card -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
         <h2 class="text-xl font-bold text-slate-900 tracking-tight">Personal summary</h2>
-        @if(!empty($user->summary))
-            <p class="text-sm text-slate-600 leading-relaxed">{{ $user->summary }}</p>
-            <button @click="openEditSummary('{{ addslashes($user->summary) }}')" class="px-5 py-2 text-sm font-semibold text-indigo-700 bg-white border-2 border-indigo-700 rounded-xl hover:bg-indigo-50/50 active:bg-indigo-50 transition-colors">
+        @if(!empty($user->about_me))
+            <p class="text-sm text-slate-600 leading-relaxed">{{ $user->about_me }}</p>
+            <button @click="openEditSummary('{{ addslashes($user->about_me) }}')" class="px-5 py-2 text-sm font-semibold text-indigo-700 bg-white border-2 border-indigo-700 rounded-xl hover:bg-indigo-50/50 active:bg-indigo-50 transition-colors">
                 Edit summary
             </button>
         @else
@@ -662,7 +662,7 @@
                     <div>
                         <label for="summary" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Introduction / Summary</label>
                         <textarea name="summary" id="summary" x-model="summaryForm.summary" rows="5" required placeholder="Introduce yourself, your academic experience, or career goals..."
-                            class="w-full rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:ring-1 focus:ring-indigo-500 transition-all p-2.5 resize-y"></textarea>
+                            class="w-full rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:ring-1 focus:ring-indigo-500 transition-all p-2.5 resize-y">{{ $user->about_me }}</textarea>
                     </div>
                     <div class="flex items-center justify-end gap-3 pt-4 mt-6 border-t border-slate-100">
                         <button type="button" @click="openSummaryModal = false" class="px-4 py-2 text-sm font-semibold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 active:bg-slate-100 transition-colors">Cancel</button>

@@ -249,7 +249,7 @@ class JobRecommendationController extends Controller
     /**
      * Handle the user applying for/saving a job.
      */
-    public function apply(StoreJobApplyRequest $request, $jobId)
+    public function applyJob(StoreJobApplyRequest $request, $jobId)
     {
         // 1. Fetch the job posting using your custom unique 'job_id' column
         $job = JobPosting::where('job_id', $jobId)->firstOrFail();
@@ -313,11 +313,12 @@ class JobRecommendationController extends Controller
 
     public function profile_review($job_id)
     {
-        $job = JobPosting::where('job_id', $job_id)->firstOrFail();
-        $user = Auth::user();
+        $userEmail = Auth::user();
+        $job = JobPosting::where('job_id', $job_id)->first();
+        $user = UserDetails::where('idno', auth()->user()->idno)->first();
         $educationalDetails = EducationalDetail::where('idno', auth()->user()->idno)->get();
         $work = WorkDetails::where('idno', auth()->user()->idno)->first();
         $expertise = Expertise::all();
-        return view('recp', compact('user', 'job', 'work', 'educationalDetails', 'expertise'));
+        return view('recp', compact('user', 'job', 'work', 'educationalDetails', 'expertise', 'userEmail'));
     }
 }

@@ -20,7 +20,7 @@ use App\Http\Controllers\UserAboutController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\UserCivilController;
 use App\Http\Controllers\UserDetailsController;
-use App\Http\Controllers\UserGenderController;
+use App\Http\Controllers\UserContactController;
 use App\Http\Controllers\UserSexController;
 use App\Http\Controllers\WorkDetailsController;
 use Illuminate\Support\Facades\Route;
@@ -75,8 +75,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/app/sex', [UserSexController::class, 'index'])->name('sex.index');
     Route::put('/app/{idno}/sex', [UserDetailsController::class, 'updatesex'])->name('sex.update');
 
-    Route::get('/app/gender', [UserGenderController::class, 'index'])->name('gender.index');
-    Route::put('/app/{idno}/gender', [UserDetailsController::class, 'updateGender'])->name('gender.update');
+    // Route::get('/app/gender', [UserGenderController::class, 'index'])->name('gender.index');
+    // Route::put('/app/{idno}/gender', [UserDetailsController::class, 'updateGender'])->name('gender.update');
+    
+    Route::get('/app/contact', [UserDetailsController::class, 'contact'])->name('contact.index');
+    Route::put('/app/{idno}/contact', [UserDetailsController::class, 'updateContact'])->name('contact.update');
 
     Route::get('/app/civil', [UserCivilController::class, 'index'])->name('civil.index');
     Route::put('/app/{idno}/civil', [UserDetailsController::class, 'updateCivil'])->name('civil.update');
@@ -121,8 +124,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/recd/{job_id}', [JobRecommendationController::class, 'details'])->name('job_details');
     Route::post('/recd/{job_id}/save', [JobRecommendationController::class, 'toggleSave'])->name('jobs_save');
     Route::delete('/recd/{job_id}/cancel-application', [JobRecommendationController::class, 'cancel'])->name('jobs_cancel');
-    Route::post('/recp/{job_id}', [JobRecommendationController::class, 'profile_review'])->name('profile_review');
-    Route::post('/recp/{job_id}/apply', [JobRecommendationController::class, 'apply'])->name('jobs_apply');
+
+    Route::get('/recp/jobs/{job_id}', [JobRecommendationController::class, 'profile_review'])->name('profile_review');
+    Route::post('/recp/jobs/{job_id}/apply', [JobRecommendationController::class, 'applyJob'])->name('jobs_apply');
+    Route::put('/recp/users/{idno}/contact', [UserDetailsController::class, 'contact_details'])->name('contact_details');
+
 
     /* --- Employer Portal --- */
     Route::get('/par', [JobPostingController::class, 'index'])->name('par.index');
@@ -154,8 +160,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/adtv/lu', [AdminAccountController::class, 'adtv_listUsers'])->name('adtv_listUsers');
     Route::get('/adtv/nu', [AdminAccountController::class, 'adtv_addUser'])->name('adtv_addUser');
     Route::post('/adtv/nu', [AdminAccountController::class, 'adtv_storeUser'])->name('adtv_storeUser');
-    //Route::get('/admin/users', [AdminAccountController::class, 'adtvListUsers'])->name('adtvListUsers');
-    Route::get('/admin/admins', [AdminAccountController::class, 'adtv_listAdmins'])->name('adtv_listAdmins');
     Route::get('/adtv/emp', [AdminAccountController::class, 'adtv_createEmployer'])->name('adtv_createEmployer');
     Route::post('/adtv/emp', [AdminAccountController::class, 'adtv_storeEmployer'])->name('adtv_storeEmployer');
     Route::get('/adtv/loj', [AdminAccountController::class, 'listJobs'])->name('listJobs');
