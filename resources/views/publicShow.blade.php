@@ -77,7 +77,7 @@
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 mb-3">Job Description</h3>
                         <div class="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
-                            {{ $job->job_description ?? $job->description ?? 'No additional job description provided for this vacancy.' }}
+                            {{ trim(strip_tags(html_entity_decode($job->job_description ?? $job->description ?? 'No additional job description provided for this vacancy.'))) }}
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                         <div class="pt-6 border-t border-gray-100">
                             <h3 class="text-lg font-bold text-gray-900 mb-3">Qualifications & Requirements</h3>
                             <div class="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
-                                {{ $job->qualification ?? $job->requirements }}
+                                {{ trim(strip_tags(html_entity_decode($job->qualification ?? $job->requirements ?? 'No qualifications or requirements specified.'))) }}
                             </div>
                         </div>
                     @endif

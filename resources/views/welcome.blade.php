@@ -74,11 +74,12 @@
                 <div class="w-full">
 
                     <h2 class="text-xl lg:text-2xl font-bold tracking-tight text-[#1b1b18] dark:text-[#EDEDEC] mb-3">
-                        About the C.O.R.E. Platform
+                        About the C.O.R.E.
                     </h2>
 
                     <p class="text-sm leading-relaxed text-[#706f6c] dark:text-[#A1A09A] mb-5">
-                        Welcome to the centralized Public Employment Service portal. This application is designed to streamline employment opportunities and livelihood assistance by directly connecting local job seekers with verified employers.
+                        Welcome to the centralized Public Employment Service portal. This application is designed to simplify and organize employment opportunities by directly connecting local job seekers with verified employers.
+
                     </p>
 
                     <!-- Feature Cards Container -->
@@ -90,7 +91,7 @@
                                 <strong class="font-semibold text-[#1b1b18] dark:text-[#EDEDEC] block mb-0.5">For Job Seekers:</strong>
                                 Discover location-based job openings and apply directly online.
                             </p>
-                        </div>
+                        </div>       
 
                         <!-- For Employers & Admins -->
                         <div class="p-3.5 rounded-lg bg-[#f8fafc] dark:bg-[#1f1f1e] border border-[#e2e8f0] dark:border-[#2a2a28]">
@@ -99,7 +100,6 @@
                                 Publish vacancies and track applicant matching in real time.
                             </p>
                         </div>
-
                     </div>
 
                     <!-- "Find Your Future" Clickable CTA Button -->

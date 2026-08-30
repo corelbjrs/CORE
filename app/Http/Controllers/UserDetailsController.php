@@ -83,7 +83,7 @@ class UserDetailsController extends Controller
         $contactDetails = UserDetails::where('idno', $idno)->firstOrFail();
 
         $contactDetails->update($validatedData);
-        
+
         $jobId = $request->input('job_id');
 
         // If job_id exists, redirect to profile_review with the parameter
@@ -325,7 +325,7 @@ class UserDetailsController extends Controller
         $validatedData = $request->validated();
         $userAddress = UserDetails::where('idno', $idno)->firstOrFail();
         $userAddress->update($validatedData);
-        
+
         return back()->with('success', 'User details updated.');
     }
     /**

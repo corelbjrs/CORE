@@ -69,7 +69,7 @@
     </div>
 
     <div class="mt-8">
-        <a href="{{ url()->previous() }}" class="text-blue-600 hover:underline">&larr; Back to Recommendations</a>
+        <a href="{{ route('recommended') }}" class="text-blue-600 hover:underline">&larr; Back to Recommendations</a>
     </div>
 </div>
 <!-- Main Buttons Layout Wrapper -->

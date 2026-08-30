@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/app/gender', [UserGenderController::class, 'index'])->name('gender.index');
     // Route::put('/app/{idno}/gender', [UserDetailsController::class, 'updateGender'])->name('gender.update');
-    
+
     Route::get('/app/contact', [UserDetailsController::class, 'contact'])->name('contact.index');
     Route::put('/app/{idno}/contact', [UserDetailsController::class, 'updateContact'])->name('contact.update');
 

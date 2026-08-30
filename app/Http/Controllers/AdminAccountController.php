@@ -39,7 +39,7 @@ class AdminAccountController extends Controller
         return view('adtv.emp', compact('user'));
     }
 
-    public function adtvListUsers(): View
+    public function adtv_listUsers(): View
     {
         // Fetch and separate users by their account usertype
         $admins = UserDetails::whereHas('account', function ($query) {
@@ -175,7 +175,10 @@ class AdminAccountController extends Controller
         // 3. Execute Transaction
         DB::transaction(function () use ($validatedData) {
             // Generate a single random password
-            $plainPassword = Str::password(10);
+            // $plainPassword = Str::password(10);
+
+            // temporary password generation for employer account creation
+            $plainPassword = '12345678';
 
             // Create User
             $user = User::create([

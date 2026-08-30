@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateJobPostingRequest;
 use App\Http\Requests\UpdateEmployerRequest;
 use App\Models\JobPosting;
 use App\Models\User;
+use App\Models\EducationalDetail;
+use App\Models\UserDetails;
 use App\Models\Employer;
 use App\Models\Expertise;
 use App\Models\JobApplication;
@@ -258,10 +260,23 @@ class JobPostingController extends Controller
             ->where('job_id', $job_id)
             ->firstOrFail();
 
-        $user = $application->user;
-        $userDetails = $user->details;
+        // $user = $application->user;
+        $user = User::where('idno', $idno)->first();
 
-        return view('par.app', compact('application', 'user', 'userDetails'));
+        $userB = DB::table('user_details')
+        ->leftJoin('barangays', 'user_details.brgy', '=', 'barangays.id') // adjust primary key column if needed
+        ->leftJoin('towns', 'user_details.town', '=', 'towns.id')         // adjust primary key column if needed
+        ->where('user_details.idno', $idno)
+        ->select(
+            'user_details.*',
+            'barangays.barangay as barangay_name',
+            'towns.town as town_name'
+        )
+        ->first();
+
+        $userDetails = $user->details;
+        $educationalDetails = EducationalDetail::where('idno', $idno)->get();
+        return view('par.app', compact('application', 'user', 'userDetails', 'userB', 'educationalDetails'));
     }
     public function addToInterviewList(Request $request, $job_id, $idno)
     {

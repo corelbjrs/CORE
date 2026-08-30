@@ -129,7 +129,7 @@
             @else
                 <div class="space-y-4">
                     @foreach($jobs as $job)
-                        <div class="bg-white border-l-4 border-blue-400 border-t border-r border-b border-gray-200 rounded-r-xl p-4 shadow-sm hover:shadow transition">
+                        <div class="bg-white border-l-4 border-blue-400 border-t border-r border-b rounded-r-xl p-4 shadow-sm hover:shadow transition">
                             <div class="flex items-start gap-3">
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center gap-1.5 flex-wrap mb-1 text-xs text-gray-500">
@@ -170,25 +170,19 @@
 
         <!-- COLUMN 2: DISCOVERY & TRENDS (STACKED SECTIONS) -->
         <div class="space-y-8">
-
             <!-- 1. COLLABORATIVE FILTERING (GREEN SECTION) -->
-            <div>
-                <div class="mb-4 pb-2 border-b-2 border-green-400">
-                    <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
-                        <span class="h-3 w-3 rounded-full bg-green-500 flex-shrink-0"></span>
-                        People Also Viewed
-                    </h2>
-                    <p class="text-xs text-gray-500">Based on peer search history.</p>
-                </div>
-
-                @if(!isset($collaborativeJobs) || $collaborativeJobs->isEmpty())
-                    <div class="bg-gray-50 border border-gray-200 text-gray-500 p-4 rounded-xl text-sm">
-                        No peer recommendations available right now. Check out the latest and popular jobs below.
+            @if(isset($collaborativeJobs) && !$collaborativeJobs->isEmpty())
+                <div>
+                    <div class="mb-4 pb-2 border-b-2 border-green-400">
+                        <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                            <span class="h-3 w-3 rounded-full bg-green-500 flex-shrink-0"></span>
+                            People Also Viewed
+                        </h2>
+                        <p class="text-xs text-gray-500">Based on peer search history.</p>
                     </div>
-                @else
                     <div class="space-y-4">
                         @foreach($collaborativeJobs as $job)
-                            <div class="bg-white border-l-4 border-green-400 border-t border-r border-b border-gray-200 rounded-r-xl p-4 shadow-sm hover:shadow transition">
+                            <div class="bg-white border-l-4 border-green-400 border-t border-r border-b  rounded-r-xl p-4 shadow-sm hover:shadow transition">
                                 <div class="flex justify-between items-start gap-2 mb-1">
                                     <h3 class="text-base font-semibold text-gray-900 leading-snug truncate">{{ $job->job_title }}</h3>
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-green-50 text-green-800 flex-shrink-0">
@@ -215,27 +209,50 @@
                             </div>
                         @endforeach
                     </div>
-                @endif
-            </div>
+                </div>
+            @else
+                <div class="bg-gray-50 border border-gray-200 text-gray-500 p-4 rounded-xl text-sm">
+                    <div class="w-full">
+                        <h2 class="text-xl lg:text-2xl font-bold tracking-tight text-[#1b1b18] dark:text-[#EDEDEC] mb-3">
+                            About the C.O.R.E.
+                        </h2>
+
+                        <p class="text-sm leading-relaxed text-[#706f6c] dark:text-[#A1A09A] mb-5">
+                            Welcome to the centralized Public Employment Service portal. This application is designed to simplify and organize employment opportunities by directly connecting local job seekers with verified employers. It provides a user-friendly interface for job seekers to explore available positions, apply online, and receive notifications about relevant job openings.
+                        </p>
+                        <p class="text-sm leading-relaxed text-[#706f6c] dark:text-[#A1A09A] mb-5">
+                            Employers can efficiently post vacancies and track the recruitment process in real time. The platform also offers resources and support for skill development, career guidance, and access to government programs aimed at enhancing employability. By fostering a transparent and efficient job market, the C.O.R.E. portal aims to empower individuals and communities towards sustainable employment and economic growth.
+                        </p>
+                        <div class="space-y-3 mb-6">
+
+                            <!-- For Job Seekers -->
+                            <div class="p-3.5 rounded-lg bg-[#f8fafc] dark:bg-[#1f1f1e] border border-[#e2e8f0] dark:border-[#2a2a28]">
+                                <p class="text-xs lg:text-sm leading-normal text-[#706f6c] dark:text-[#A1A09A]">
+                                    <strong class="font-semibold text-[#1b1b18] dark:text-[#EDEDEC] block mb-0.5">The C.O.R.E portal is still learning, help us improve!</strong>
+                                    <a href="{{ route('recommended') }}" class="text-blue-500 hover:text-blue-700">
+                                        Go to Suggestion Box
+                                    </a>to provide feedback on job matches, application process, and overall user experience. This will help the C.O.R.E. portal refine its algorithms and improve the quality of job recommendations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <!-- 2. NEWLY ADDED JOBS (PURPLE SECTION) -->
-            <div>
-                <div class="mb-4 pb-2 border-b-2 border-purple-400">
-                    <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
-                        <span class="h-3 w-3 rounded-full bg-purple-500 flex-shrink-0"></span>
-                        Newly Added Jobs
-                    </h2>
-                    <p class="text-xs text-gray-500">Latest job postings updated recently.</p>
-                </div>
-
-                @if(!isset($newlyAddedJobs) || $newlyAddedJobs->isEmpty())
-                    <div class="bg-gray-50 border border-gray-200 text-gray-500 p-4 rounded-xl text-sm">
-                        No newly added jobs found.
+            @if(isset($newlyAddedJobs) && !$newlyAddedJobs->isEmpty())
+                <div>
+                    <div class="mb-4 pb-2 border-b-2 border-purple-400">
+                        <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                            <span class="h-3 w-3 rounded-full bg-purple-500 flex-shrink-0"></span>
+                            Newly Added Jobs
+                        </h2>
+                        <p class="text-xs text-gray-500">Latest job postings updated recently.</p>
                     </div>
-                @else
+
                     <div class="space-y-4">
                         @foreach($newlyAddedJobs as $job)
-                            <div class="bg-white border-l-4 border-purple-400 border-t border-r border-b border-gray-200 rounded-r-xl p-4 shadow-sm hover:shadow transition">
+                            <div class="bg-white border-l-4 border-purple-400 border-t border-r border-b  rounded-r-xl p-4 shadow-sm hover:shadow transition">
                                 <div class="flex justify-between items-start gap-2 mb-1">
                                     <h3 class="text-base font-semibold text-gray-900 leading-snug truncate">{{ $job->job_title }}</h3>
                                     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-800 flex-shrink-0">
@@ -263,27 +280,23 @@
                             </div>
                         @endforeach
                     </div>
-                @endif
-            </div>
+                </div>
+            @endif
 
             <!-- 3. MOST SAVED JOBS (AMBER SECTION) -->
-            <div>
-                <div class="mb-4 pb-2 border-b-2 border-amber-400">
-                    <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
-                        <span class="h-3 w-3 rounded-full bg-amber-500 flex-shrink-0"></span>
-                        Most Saved Jobs
-                    </h2>
-                    <p class="text-xs text-gray-500">Popular vacancies bookmarked by applicants.</p>
-                </div>
-
-                @if(!isset($mostSavedJobs) || $mostSavedJobs->isEmpty())
-                    <div class="bg-gray-50 border border-gray-200 text-gray-500 p-4 rounded-xl text-sm">
-                        No saved job data available yet.
+            @if(isset($mostSavedJobs) && !$mostSavedJobs->isEmpty())
+                <div>
+                    <div class="mb-4 pb-2 border-b-2 border-amber-400">
+                        <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                            <span class="h-3 w-3 rounded-full bg-amber-500 flex-shrink-0"></span>
+                            Most Saved Jobs
+                        </h2>
+                        <p class="text-xs text-gray-500">Popular vacancies bookmarked by applicants.</p>
                     </div>
-                @else
+
                     <div class="space-y-4">
                         @foreach($mostSavedJobs as $job)
-                            <div class="bg-white border-l-4 border-amber-400 border-t border-r border-b border-gray-200 rounded-r-xl p-4 shadow-sm hover:shadow transition">
+                            <div class="bg-white border-l-4 border-amber-400 border-t border-r border-b rounded-r-xl p-4 shadow-sm hover:shadow transition">
                                 <div class="flex justify-between items-start gap-2 mb-1">
                                     <h3 class="text-base font-semibold text-gray-900 leading-snug truncate">{{ $job->job_title }}</h3>
                                     @if(isset($job->saves_count))
@@ -316,11 +329,9 @@
                             </div>
                         @endforeach
                     </div>
-                @endif
-            </div>
-
+                </div>
+            @endif
         </div>
-
     </div>
 </div>
 
